@@ -69,6 +69,13 @@ Base/
 │       ├── 异常场景.md
 │       ├── 验收标准.md
 │       └── 关联关系.md
+├── 10-QA验证/
+│   └── QA-001-功能名称验证/
+│       ├── QA报告.md
+│       ├── 用户模拟记录.md
+│       ├── 风险评估矩阵.md
+│       ├── 运营分析.md
+│       └── 人类确认记录.md
 ├── 06-实现管理/
 │   └── IMP-001-功能名称实现/
 │       ├── 实现任务清单.md
@@ -99,12 +106,13 @@ Base/
 2. 一个产品设计 = 一个 `PD-*` 文件夹。
 3. 一个技术方案 = 一个 `TD-*` 文件夹。
 4. 一个功能 = 一个 `FT-*` 文件夹。
-5. 一个实现 = 一个 `IMP-*` 文件夹。
-6. 一个变更 = 一个 `CR-*` 文件夹。
-7. 一个测试验收 = 一个 `TEST-*` 文件夹。
-8. 总览、README、看板只做导航，不承载具体需求或实现细节。
-9. `Base/` 不存放真实代码工程文件；代码工程目录与 `Base/` 平级，由 `Base/00-项目总览/项目结构基线.md` 定义。
-10. `IMP-*` 只记录实现任务、关联代码文件、变更说明和验证结果；真实源码由 AI 写入代码工程目录。
+5. 一个 QA 验证 = 一个 `QA-*` 文件夹。
+6. 一个实现 = 一个 `IMP-*` 文件夹。
+7. 一个变更 = 一个 `CR-*` 文件夹。
+8. 一个测试验收 = 一个 `TEST-*` 文件夹。
+9. 总览、README、看板只做导航，不承载具体需求或实现细节。
+10. `Base/` 不存放真实代码工程文件；代码工程目录与 `Base/` 平级，由 `Base/00-项目总览/项目结构基线.md` 定义。
+11. `IMP-*` 只记录实现任务、关联代码文件、变更说明和验证结果；真实源码由 AI 写入代码工程目录。
 
 ### 2.3 Base 与代码工程目录
 
@@ -153,9 +161,9 @@ IMP-*                 # 记录 Base 对象与代码工程文件的映射
 | 意图类型 | 判断方式 | 目标链路 |
 |---|---|---|
 | 新项目 / 新产品方向 | Base 缺少项目目标或产品基线 | PM：需求捕获 → 候选方案 → Base 初始化 |
-| 新需求 / 新功能 | Base 中无对应 RQ / FT | PM：RQ → VR → PD → TD → FT → IMP → TEST |
+| 新需求 / 新功能 | Base 中无对应 RQ / FT | PM：RQ → VR → PD → TD → FT → QA → IMP → TEST |
 | 已有需求细化 | 已有 RQ，缺 VR / PD / TD / FT | PM：补齐缺失对象包 |
-| 功能实现 | 已有 RQ、VR、PD、TD、FT，缺 IMP | PM + Code：创建 IMP 并执行任务 |
+| 功能实现 | 已有 RQ、VR、PD、TD、FT，缺 IMP | PM + QA：QA 验证通过后创建 IMP → Dev 执行任务 |
 | 反馈 / 偏差 | 初版或实现与意图不一致 | PM：FB → CR → 影响分析 → 增量实现 |
 | BUG / 测试问题 | 已有实现，出现失败或异常 | PM + Code：TEST / BUG 修复链路 |
 | DB / UI / Code 咨询 | 不改变产品意图，仅专业建议 | 直接路由 Domain / Dev |
@@ -170,9 +178,10 @@ IMP-*                 # 记录 Base 对象与代码工程文件的映射
 2. 无已确认的 `AI候选方案.md` 与 `人类确认记录.md`，不得进入产品设计。
 3. 无 `PD` 与 `TD`，不得进入实现。
 4. 无 `FT/验收标准.md`，不得声明实现完成。
-5. 修改已有功能必须创建 `CR-*`，不得直接覆盖原需求意图。
-6. AI 修改代码前必须声明当前对应的 `RQ / FT / IMP`。
-7. 所有实现任务必须能追溯到需求、设计、方案、验收标准。
+5. FT 已确认后，必须经 QA Agent 验证（生成 `QA-*`），人类确认通过后方可创建 `IMP-*`。
+6. 修改已有功能必须创建 `CR-*`，不得直接覆盖原需求意图；重大变更需重新 QA。
+7. AI 修改代码前必须声明当前对应的 `RQ / FT / IMP`。
+8. 所有实现任务必须能追溯到需求、设计、方案、QA验证、验收标准。
 
 ---
 
@@ -182,9 +191,22 @@ IMP-*                 # 记录 Base 对象与代码工程文件的映射
 |---|---|
 | 业务分析 / 隐性需求挖掘 / 痛点推断（用户说不清要什么） | `skills/BA/BA-skill.md`，AI 自行判断并按需加载 BA-skills 子文件；复杂场景可调用 Council Advisor 视角（通过 advisor-matching-skill 动态匹配） |
 | 产品 / 需求 / 变更 | `skills/pm/PM-skill.md` |
-| 编码 / 实现 / 修复 | `skills/code/code-skill.md`，按需加载 01/02/07/10/11 |
+| 编码 / 实现 / 修复 | `skills/code/code-skill.md`，按需加载 01/02/06/07/10/11（06-子Agent驱动开发，07-TDD与验证） |
 | 数据库 / 数据结构 / SQL | `skills/db/DB-skill.md`，按需加载子文件 |
 | UI / 页面 / 交互 / 视觉 | `skills/ui/UI-skill.md`，按任务分级加载 |
+| Agent工作流 / 子Agent调度 | `skills/code/code-skills/06-agent-delegation.md` |
+| 测试驱动开发 / 验证 | `skills/code/code-skills/07-verification.md` |
+| 开发环境搭建 / 工具链配置 | `skills/code/code-skills/13-dev-env-setup.md` |
+| 多平台发布 / 版本管理 | `skills/code/code-skills/14-multi-platform-release.md` |
+| 调试排查 / 问题定位 | `skills/code/code-skills/15-debugging.md` |
+| 性能优化 / 性能提升 | `skills/code/code-skills/16-performance-optimization.md` |
+| 常见问题 / 快速排查 | `skills/code/code-skills/17-troubleshooting.md` |
+| API 设计 / 接口规范 | `skills/code/code-skills/18-api-design.md` |
+| 代码审查 / PR 评审 | `skills/code/code-skills/19-code-review.md` |
+| CI/CD / 自动化部署 | `skills/code/code-skills/20-cicd.md` |
+| 架构设计 / 技术选型 | `skills/code/code-skills/21-architecture.md` |
+| QA验证 / 用户模拟 / 风险评估 / 运营分析（FT确认后强制环节） | `agents/qa-agent/SKILL.md`，按需加载 qa-agent/skills/01~05 |
+| 提示词体系 / 关节节点提示 | `skills/prompts/phase-prompts.md`；`skills/prompts/joint-node-prompts.md` |
 
 挂载只提供路径，不内联下级内容。AI 应根据当前 Base 对象包最小化读取上下文。
 

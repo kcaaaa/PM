@@ -421,3 +421,146 @@ SELECT * FROM information_schema.INNODB_TRX;
 -- 减少隔离级别（如读已提交）
 -- 优化索引减少锁范围
 ```
+
+---
+
+## PostgreSQL 性能优化专项 ⚠️ 新增
+
+> **来源**：由 skills.sh supabase-postgres-best-practices 技能内容按本文件格式重新描述。
+> **作用**：提供 PostgreSQL/Supabase 特有的性能优化策略，涵盖查询性能、连接管理、安全与 RLS、Schema 设计等维度。
+
+### 查询性能优化
+
+```sql
+-- ✗ 错误：全表扫描
+SELECT * FROM orders WHERE customer_id = 123;
+
+-- ✓ 正确：创建索引
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+
+-- ✗ 错误：避免SELECT *
+SELECT * FROM users;
+
+-- ✓ 正确：只获取需要的列
+SELECT id, name, email FROM users;
+
+-- ✓ 部分索引：仅对活跃订单创建索引
+CREATE INDEX idx_orders_active ON orders(id) WHERE status = 'active';
+
+-- ✓ 使用EXPLAIN分析查询
+EXPLAIN ANALYZE SELECT * FROM orders WHERE customer_id = 123;
+```
+
+### 连接管理
+
+```sql
+-- Supabase默认使用PGBouncer连接池
+-- 配置合适的最大连接数
+-- 避免长时间保持连接
+
+-- 使用连接池复用连接
+-- 避免频繁创建和销毁连接
+-- 设置合理的连接超时时间
+```
+
+### 安全与行级安全（RLS）
+
+```sql
+-- ✓ 启用RLS
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+
+-- ✓ 创建策略
+CREATE POLICY "Users can view their own data" ON users
+  FOR SELECT USING (auth.uid() = id);
+
+-- ✓ 最小权限原则
+-- 只为角色授予必要的权限
+-- 避免使用超级用户连接
+-- 定期审查权限配置
+```
+
+### Schema 设计
+
+```sql
+-- ✓ 第三范式
+-- 避免数据冗余
+-- 正确使用外键约束
+-- 合理设计表关系
+
+-- ✓ 选择合适的数据类型
+-- 使用合适的数字类型（INT, BIGINT, NUMERIC）
+-- 使用TEXT而非VARCHAR(n)
+-- 使用DATE/TIMESTAMP而非字符串
+```
+
+### 并发与锁定
+
+```sql
+-- ✓ 避免长时间事务
+-- 事务应尽可能短
+-- 避免在事务中等待用户输入
+-- 使用合适的事务隔离级别
+
+-- ✓ 锁竞争优化
+-- 使用SELECT FOR UPDATE SKIP LOCKED避免锁等待
+-- 合理设计更新顺序
+-- 使用乐观锁减少冲突
+```
+
+### 数据访问模式
+
+```sql
+-- ✓ 批量操作：使用UNNEST进行批量插入
+INSERT INTO items (id, name)
+SELECT * FROM UNNEST(ARRAY[1, 2, 3], ARRAY['a', 'b', 'c']);
+
+-- ✓ 使用CTE优化复杂查询
+WITH recent_orders AS (
+  SELECT * FROM orders WHERE created_at > NOW() - INTERVAL '7 days'
+)
+SELECT COUNT(*) FROM recent_orders WHERE status = 'completed';
+```
+
+### PostgreSQL 扩展
+
+```sql
+-- ✓ 使用Postgres扩展
+-- pg_stat_statements：查询性能分析
+-- pg_trgm：模糊匹配
+-- pgvector：向量搜索
+
+-- ✓ 分区表：对大表进行分区
+CREATE TABLE orders (
+    id BIGINT PRIMARY KEY,
+    customer_id BIGINT,
+    created_at TIMESTAMP
+) PARTITION BY RANGE (created_at);
+```
+
+### PostgreSQL 监控
+
+```sql
+-- ✓ 监控查询性能
+-- 使用Supabase Dashboard查看查询性能
+-- 设置慢查询日志
+-- 定期审查查询计划
+
+-- ✓ 查看查询统计
+SELECT * FROM pg_stat_statements ORDER BY total_time DESC LIMIT 10;
+
+-- ✓ 查看表统计
+SELECT * FROM pg_stat_user_tables;
+```
+
+### 规则类别按优先级排序
+
+| 优先级 | 类别 | 影响 | 前缀 |
+|----------|----------|--------|--------|
+| 1 | 查询性能 | CRITICAL | `query-` |
+| 2 | 连接管理 | CRITICAL | `conn-` |
+| 3 | 安全与RLS | CRITICAL | `security-` |
+| 4 | Schema设计 | HIGH | `schema-` |
+| 5 | 并发与锁定 | MEDIUM-HIGH | `lock-` |
+| 6 | 数据访问模式 | MEDIUM | `data-` |
+| 7 | 监控与诊断 | LOW-MEDIUM | `monitor-` |
+| 8 | 高级功能 | LOW | `advanced-` |

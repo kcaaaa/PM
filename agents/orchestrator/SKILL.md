@@ -38,6 +38,7 @@ Base/
 ├── 03-产品设计/     PD-*
 ├── 04-方案设计/     TD-*
 ├── 05-功能管理/     FT-*
+├── 10-QA验证/       QA-*
 ├── 06-实现管理/     IMP-*
 ├── 07-反馈管理/     FB-*
 ├── 08-变更管理/     CR-*
@@ -57,9 +58,9 @@ Base/
 | 需求不清晰 | 有方向但缺场景、边界、验收 | 给 3-5 个需求理解模型 → 推荐一个 |
 | 产品设计 | 已有 RQ，缺 PD | 调度 PM 生成 PD 包 |
 | 技术方案 | 已有 RQ / PD，缺 TD | 调度 PM + Domain 生成 TD 包 |
-| 功能实现 | 已有 RQ / PD / TD / FT，缺 IMP | 调度 PM + Dev 创建 IMP 包并执行 |
+| 功能实现 | 已有 RQ / PD / TD / FT，缺 IMP | 调度 QA Agent → PM + Dev（QA 通过后创建 IMP） |
 | 反馈偏差 | 实现与人类意图不一致 | 创建 FB / CR 包，先做影响分析 |
-| 变更需求 | 已有功能需要调整 | 创建 CR 包，不直接改原需求 |
+| 变更需求 | 已有功能需要调整 | 创建 CR 包，不直接改原需求；重大变更需 QA Agent 重审 |
 | 测试验收 | 已有 IMP，需验证 | 创建 TEST 包或 BUG 修复链路 |
 | 纯咨询 | 不改变产品意图 | 直接路由 Dev / Domain |
 
@@ -104,9 +105,24 @@ Base/
 | 场景 | 调度目标 | 读取 / 写入 |
 |---|---|---|
 | RQ / VR / PD / TD / FT / CR / TEST | PM Agent | `skills/pm/PM-skill.md` |
-| IMP 执行 / 代码修复 / 测试实现 | Dev Agent | `skills/code/code-skill.md` |
+| FT 已确认，准备进入 IMP（强制验证） | QA Agent | `agents/qa-agent/SKILL.md` |
+| CR（变更）影响范围较大 | QA Agent | `agents/qa-agent/SKILL.md` |
+| TD 涉及复杂技术选型或高风险架构 | QA Agent + Domain Agent | `agents/qa-agent/SKILL.md` + `skills/db/DB-skill.md` / `skills/ui/UI-skill.md` |
+| IMP 执行 / 代码修复 / 测试实现（QA 通过后） | Dev Agent | `skills/code/code-skill.md` |
 | 数据结构 / SQL / 性能 / UI 设计 | Domain Agent | `skills/db/DB-skill.md` 或 `skills/ui/UI-skill.md` |
 | 多领域复杂任务 | PM 先定义链路，再按需调度 Dev / Domain | Base 对象包为上下文边界 |
+| 子Agent调度 / 并行任务 | Dev Agent | `skills/code/code-skills/06-agent-delegation.md` |
+| TDD开发 / 测试验证 | Dev Agent | `skills/code/code-skills/07-verification.md` |
+| 开发环境搭建 / 工具链配置 | Dev Agent | `skills/code/code-skills/13-dev-env-setup.md` |
+| 多平台发布 / 版本管理 | Dev Agent | `skills/code/code-skills/14-multi-platform-release.md` |
+| 调试排查 / 问题定位 | Dev Agent | `skills/code/code-skills/15-debugging.md` |
+| 性能优化 / 性能提升 | Dev Agent | `skills/code/code-skills/16-performance-optimization.md` |
+| 常见问题 / 快速排查 | Dev Agent | `skills/code/code-skills/17-troubleshooting.md` |
+| API 设计 / 接口规范 | Dev Agent | `skills/code/code-skills/18-api-design.md` |
+| 代码审查 / PR 评审 | Dev Agent | `skills/code/code-skills/19-code-review.md` |
+| CI/CD / 自动化部署 | Dev Agent | `skills/code/code-skills/20-cicd.md` |
+| 架构设计 / 技术选型 | Dev Agent | `skills/code/code-skills/21-architecture.md` |
+| 提示词生成 / 关节节点提示 | Orchestrator | `skills/prompts/phase-prompts.md`；`skills/prompts/joint-node-prompts.md` |
 
 ---
 
@@ -116,8 +132,9 @@ Base/
 2. 无 `AI候选方案.md` 与 `人类确认记录.md`，不得进入产品设计。
 3. 无 `PD-*` 和 `TD-*`，不得进入功能实现。
 4. 无 `FT-*/验收标准.md`，不得声明实现完成。
-5. 所有变更必须创建 `CR-*`，不得直接覆盖需求意图。
-6. 修改代码前必须声明当前对应的 `RQ / FT / IMP`。
+5. FT 已确认后，必须经 QA Agent 验证（生成 `QA-*`），人类确认通过后方可创建 `IMP-*`。
+6. 所有变更必须创建 `CR-*`，不得直接覆盖需求意图；重大变更需重新 QA。
+7. 修改代码前必须声明当前对应的 `RQ / FT / IMP`。
 
 ---
 

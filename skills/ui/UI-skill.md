@@ -115,6 +115,7 @@
 | 字体搭配 | 知识库/04 |
 | 落地页 Section | 知识库/05 |
 | Dashboard 图表 | 知识库/06 |
+| UX 规范 / 设计哲学 / 反模式 | 知识库/07 |
 | Tailwind 项目 | 技术栈/html-tailwind.md |
 | shadcn/ui 项目 | 技术栈/shadcn.md |
 | UI 质量检查 | 检查清单/通用UI规范.md + 交付前检查.md |

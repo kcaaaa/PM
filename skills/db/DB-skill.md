@@ -58,6 +58,7 @@ description: "数据库设计技能包，提供完整的数据库设计指导。
 | 索引怎么建？复合索引规则？ | 本文 §核心概念·3 索引设计 + §最佳实践·2 索引设计规范 |
 | SQL 写法规范（INSERT/UPDATE/SELECT） | 本文 §最佳实践·3 SQL 编写规范 + 模板库 `DB-skills/sql-templates.md` |
 | 性能慢 / 深分页 / 多表 JOIN / 大表变更 | 本文 §常见问题解决方案 + `DB-skills/performance-tuning.md` |
+| PostgreSQL/Supabase 性能优化、RLS、扩展 | `DB-skills/performance-tuning.md` §PostgreSQL 性能优化专项 |
 | 选 MySQL 还是 PostgreSQL？MongoDB 合适吗？ | 本文 §数据库类型选择（约 415-446 行） |
 | 设计完想自查一遍 | `DB-skills/design-checklist.md`（无需读本文） |
 | 历史案例 | `DB-skills/case-studies/` |

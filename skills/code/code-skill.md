@@ -74,6 +74,15 @@ source: 综合 Claude Code 类 AI 编程助手的工程实践、本项目 Base �
 | 10 | `code-skills/10-file-operations.md` | **file-operations** | 文件读/写/编辑/搜索完整规则 | 文件操作前 |
 | 11 | `code-skills/11-communication.md` | **communication** | 响应风格、长度、语气、格式 | 每次输出面向用户的文本 |
 | 12 | `code-skills/12-security.md` | **security** | 代码安全、提示注入、敏感文件、沙箱 | 处理外部数据/敏感场景 |
+| 13 | `code-skills/13-dev-env-setup.md` | **dev-env-setup** | 开发环境搭建、工具链配置、多平台环境 | 需要搭建开发环境时 |
+| 14 | `code-skills/14-multi-platform-release.md` | **multi-platform-release** | 多平台发布流程、版本管理、发布检查清单 | 需要发布应用到各平台时 |
+| 15 | `code-skills/15-debugging.md` | **debugging** | 调试方法论、前端/后端/数据库问题排查 | 遇到代码错误或运行时异常时 |
+| 16 | `code-skills/16-performance-optimization.md` | **performance-optimization** | 性能优化、前端/后端/数据库性能提升 | 遇到页面加载慢或API响应慢时 |
+| 17 | `code-skills/17-troubleshooting.md` | **troubleshooting** | 常见问题解决方案库、快速排查指南 | 遇到开发过程中的常见问题时 |
+| 18 | `code-skills/18-api-design.md` | **api-design** | API 设计规范、RESTful API 设计原则和最佳实践 | 需要设计或评审 API 接口时 |
+| 19 | `code-skills/19-code-review.md` | **code-review** | 代码审查规范、审查流程和标准 | 需要进行代码审查或评审 PR 时 |
+| 20 | `code-skills/20-cicd.md` | **cicd** | CI/CD 流程、持续集成和持续部署最佳实践 | 需要配置自动化构建部署时 |
+| 21 | `code-skills/21-architecture.md` | **architecture** | 架构设计原则、系统架构设计和最佳实践 | 需要设计系统架构或技术选型时 |
 
 ## 调用方式
 
