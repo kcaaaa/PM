@@ -1,5 +1,5 @@
 # 全流程产品协作系统 · AI 原生 Agent / Skill
-
+# AI-Native Agent Product Collaboration for PMs & Solo Founders
 > **版本**：2.0.0  
 > **定位**：面向非开发者、产品经理、业务负责人和 AI 编程工具的纯文件型 Agent / Skill 协作系统。项目以 `Base/` 对象包作为唯一项目认知基准，通过 Orchestrator、PM、QA、Dev、Domain 等 Agent 与 BA、Code、DB、UI 等 Skill 协同，覆盖从需求捕获、方案评估、产品设计、技术方案、QA 验证、代码实现到测试验收和变更管理的完整链路。  
 > **使用方式**：本项目无需安装依赖、无需 CLI、无需运行服务。AI 编程工具直接读取 `SKILL.md`、`agents/`、`skills/`、`protocols/` 和 `docs/` 中的 Markdown 规则即可工作。
