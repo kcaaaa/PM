@@ -123,6 +123,7 @@ Base/
 | CI/CD / 自动化部署 | Dev Agent | `skills/code/code-skills/20-cicd.md` |
 | 架构设计 / 技术选型 | Dev Agent | `skills/code/code-skills/21-architecture.md` |
 | 提示词生成 / 关节节点提示 | Orchestrator | `skills/prompts/phase-prompts.md`；`skills/prompts/joint-node-prompts.md` |
+| Office 文档梳理 / .docx .xlsx .pptx 创建、检查、整理、优化（用户明确需要输出或整理 Office 文档时） | Orchestrator | `skills/extension/office-doc-skill.md` |
 
 ---
 

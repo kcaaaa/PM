@@ -207,6 +207,7 @@ IMP-*                 # 记录 Base 对象与代码工程文件的映射
 | 架构设计 / 技术选型 | `skills/code/code-skills/21-architecture.md` |
 | QA验证 / 用户模拟 / 风险评估 / 运营分析（FT确认后强制环节） | `agents/qa-agent/SKILL.md`，按需加载 qa-agent/skills/01~05 |
 | 提示词体系 / 关节节点提示 | `skills/prompts/phase-prompts.md`；`skills/prompts/joint-node-prompts.md` |
+| Office 文档梳理 / .docx .xlsx .pptx 创建、检查、整理、优化 | `skills/extension/office-doc-skill.md`（用户明确需要输出或整理 Office 文档时加载） |
 
 挂载只提供路径，不内联下级内容。AI 应根据当前 Base 对象包最小化读取上下文。
 

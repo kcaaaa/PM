@@ -47,7 +47,7 @@
 │   ├── code/                      # 21 个编码行为、验证、调试、架构与工程子技能
 │   ├── db/                        # 数据库设计、SQL 模板、性能优化
 │   ├── ui/                        # UI/UX、设计系统、技术栈落地与检查清单
-│   ├── extension/                 # TypeScript、移动端、系统优化、代码审查增强
+│   ├── extension/                 # TypeScript、移动端、系统优化、代码审查增强、Office 文档梳理
 │   └── prompts/                   # 阶段提示词与关节节点提示词
 ├── protocols/                    # Agent 间通信与错误处理协议
 └── docs/                         # 文档索引、操作手册、集成指南
@@ -74,7 +74,7 @@
 | Code Skill | 编码行为规范索引，覆盖工具使用、任务管理、验证、调试、性能、API、CI/CD、架构等 21 个子技能 |
 | DB Skill | 数据库建模、命名规范、SQL 模板、性能调优和案例模板 |
 | UI Skill | UI/UX 工作流、设计系统、Web / 多端技术栈、检查清单和知识库 |
-| Extension Skills | TypeScript、移动端、系统优化、代码审查等高级扩展能力 |
+| Extension Skills | TypeScript、移动端、系统优化、代码审查、Office 文档梳理（.docx/.xlsx/.pptx 创建、检查、整理）等高级扩展能力 |
 | Prompt Skills | 阶段提示词与关键节点提示词，用于统一多阶段协作表达 |
 
 ## Base 工作方式

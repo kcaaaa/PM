@@ -47,7 +47,7 @@
 │   ├── code/                      # 21 个编码行为、验证、调试、架构与工程子技能
 │   ├── db/                        # 数据库设计、SQL 模板、性能优化
 │   ├── ui/                        # UI/UX、设计系统、多端落地与检查清单
-│   ├── extension/                 # TypeScript、移动端、系统优化、代码审查增强
+│   ├── extension/                 # TypeScript、移动端、系统优化、代码审查增强、Office 文档梳理
 │   └── prompts/                   # 阶段提示词与关节节点提示词
 ├── protocols/                    # Agent 间通信与错误处理协议
 └── docs/                         # 文档索引、操作手册、集成指南
@@ -93,7 +93,7 @@ Base/
 | `skills/code/` | 编码行为规范索引，覆盖工具、任务、验证、调试、性能、API、CI/CD、架构等 21 个子技能 |
 | `skills/db/` | 数据库设计、SQL、命名规范、索引与性能调优 |
 | `skills/ui/` | UI/UX、设计系统、Web / 多端技术栈和检查清单 |
-| `skills/extension/` | TypeScript、移动端、系统优化、代码审查等扩展能力 |
+| `skills/extension/` | TypeScript、移动端、系统优化、代码审查、Office 文档梳理（.docx/.xlsx/.pptx 创建、检查、整理）等扩展能力 |
 | `skills/prompts/` | 阶段提示词与关键节点提示词 |
 | `protocols/` | Agent 交接字段、确认点、异常分类与处理规则 |
 | `docs/` | 文档索引、操作手册、集成说明和同步维护规则 |
